@@ -4,9 +4,8 @@ const isAsyncAction = action => action && isFunction(action.then);
 
 const reduxPromise = () => next => action => {
     const { type, payload, ...metadata } = action;
-    debugger;
     if (isAsyncAction(payload)) {
-        payload.then((response) => {
+        payload.then((response, err) => {
             next({
                 type,
                 payload: response,
